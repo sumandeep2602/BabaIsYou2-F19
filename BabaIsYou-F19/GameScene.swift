@@ -12,6 +12,7 @@ import GameplayKit
 class GameScene: SKScene, SKPhysicsContactDelegate {
 let baba = SKSpriteNode(imageNamed: "baba")
 let rocks = SKSpriteNode(imageNamed: "rocks")
+    let winBlocks = SKSpriteNode(imageNamed: "winBlocks")
      baba.position = CGPoint(x: 0, y: 0)
     override func didMove(to view: SKView)
     {
@@ -38,6 +39,31 @@ let rocks = SKSpriteNode(imageNamed: "rocks")
         
         
         let action = SKAction.moveTo(x: self.size.width, duration: 3)
+        baba.run(action)
+        
+        // BABA PUSHES THE WIN BLOCK TO RIGHT
+        
+        baba.position = CGPoint(x:self.size.width*0.25, y:self.size.height/2)
+        winBlocks.position = CGPoint(x:self.size.width*0.60, y:self.size.height/2)
+        baba.physicsBody = SKPhysicsBody(circleOfRadius: baba.size.width / 2)
+        winBlocks.physicsBody = SKPhysicsBody(rectangleOf:self.winBlocks.frame.size)
+        
+        
+        addChild(baba)
+        addChild(winBlocks)
+        let action = SKAction.moveTo(x: self.size.width, duration: 4)
+        baba.run(action)
+        //Baba pushes the win block to down
+        
+        baba.position = CGPoint(x:self.size.height*0.25, y:self.size.width/2)
+        winBlocks.position = CGPoint(x:self.size.height*0.60, y:self.size.width/2)
+        baba.physicsBody = SKPhysicsBody(circleOfRadius: baba.size.height/2)
+        winBlocks.physicsBody = SKPhysicsBody(rectangleOf:self.winBlocks.frame.size)
+        
+        
+        addChild(baba)
+        addChild(winBlocks)
+        let action = SKAction.moveTo(y: self.size.height, duration: 4)
         baba.run(action)
     }
    
